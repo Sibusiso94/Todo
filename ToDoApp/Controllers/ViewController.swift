@@ -12,19 +12,19 @@ class ViewController: UITableViewController {
     
     var tasks = [Task]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let nav = NavAppearance()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nav.homeNavAppearance(navigationItem)
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         loadTasks()
     }
 
     // MARK: - Add A New Task
-
     @IBAction func addTaskPressed(_ sender: UIBarButtonItem) {
-        
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Add a Task", message: "", preferredStyle: .alert)
@@ -48,6 +48,7 @@ class ViewController: UITableViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
 }
 
 // MARK: - Data Manipulation Methods
@@ -78,7 +79,7 @@ extension ViewController {
 extension ViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tasks.count
+        return tasks.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,7 +94,7 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         // equals the opposite, reverses what it used to be. Instead of if else
         tasks[indexPath.row].taskIsDone = !tasks[indexPath.row].taskIsDone
         self.saveTasks()

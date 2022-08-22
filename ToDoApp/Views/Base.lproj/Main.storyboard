@@ -31,9 +31,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="3dY-zN-EQz">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="ceI-mM-fWg">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="fl5-jd-eGP">
                             <connections>
-                                <action selector="addTaskPressed:" destination="72E-Cg-vPe" id="yrg-XO-T16"/>
+                                <action selector="addTaskPressed:" destination="72E-Cg-vPe" id="j0d-5x-FyY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
