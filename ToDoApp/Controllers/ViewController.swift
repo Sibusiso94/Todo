@@ -78,6 +78,43 @@ extension ViewController {
 // MARK: - Table view data source
 extension ViewController {
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
+        let archivedAction = UITableViewRowAction(style: .normal, title: "Archive") { action, indexPath in
+            self.tasks[indexPath.row].taskArchived.toggle()
+        }
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { action, indexPath in
+            
+            var textField = UITextField()
+            let alert = UIAlertController(title: "Edit Task", message: "", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "Edit Task", style: .default) { (action) in
+                self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskTitle")
+                
+                self.saveTasks()
+            }
+            
+            alert.addTextField { (alertTextField) in
+                alertTextField.placeholder = "Edit Text"
+                textField = alertTextField
+            }
+            
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        archivedAction.backgroundColor = .systemPink
+        editAction.backgroundColor = .systemMint
+        
+        return [archivedAction, editAction]
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
