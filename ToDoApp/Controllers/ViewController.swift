@@ -85,7 +85,20 @@ extension ViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
         cell.textLabel?.text = tasks[indexPath.row].taskTitle
-        return cell
         
+        // value = condition ? valueIfTrue : valuIfFalse
+        cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none
+        
+        return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // equals the opposite, reverses what it used to be. Instead of if else
+        tasks[indexPath.row].taskIsDone = !tasks[indexPath.row].taskIsDone
+        self.saveTasks()
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
 }
