@@ -103,12 +103,11 @@
 			children = (
 				5C0C2DB528B37A4700C29AF9 /* AppDelegate.swift */,
 				5C0C2DB728B37A4700C29AF9 /* SceneDelegate.swift */,
-				5C0C2DB928B37A4700C29AF9 /* ViewController.swift */,
-				5C0C2DBB28B37A4700C29AF9 /* Main.storyboard */,
+				5C0C2DE928B37AD300C29AF9 /* Controllers */,
+				5C0C2DEA28B37AE100C29AF9 /* Views */,
 				5C0C2DC128B37A4900C29AF9 /* Assets.xcassets */,
-				5C0C2DC328B37A4900C29AF9 /* LaunchScreen.storyboard */,
+				5C0C2DE828B37AC600C29AF9 /* Data Model */,
 				5C0C2DC628B37A4900C29AF9 /* Info.plist */,
-				5C0C2DBE28B37A4700C29AF9 /* ToDoApp.xcdatamodeld */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
@@ -128,6 +127,31 @@
 				5C0C2DDB28B37A4900C29AF9 /* ToDoAppUITestsLaunchTests.swift */,
 			);
 			path = ToDoAppUITests;
+			sourceTree = "<group>";
+		};
+		5C0C2DE828B37AC600C29AF9 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C0C2DBE28B37A4700C29AF9 /* ToDoApp.xcdatamodeld */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		5C0C2DE928B37AD300C29AF9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5C0C2DB928B37A4700C29AF9 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5C0C2DEA28B37AE100C29AF9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5C0C2DBB28B37A4700C29AF9 /* Main.storyboard */,
+				5C0C2DC328B37A4900C29AF9 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
