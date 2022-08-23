@@ -78,17 +78,11 @@ extension ViewController {
     
     func loadTasks() {
         let request: NSFetchRequest<Task> = Task.fetchRequest()
-        var data = [Task]()
+        
+        request.predicate = NSPredicate(format: "taskArchived == 0")
         
         do {
-            data = try context.fetch(request)
-            for d in data {
-                if d.taskArchived {
-                    archivedTasks.append(d)
-                } else {
-                    tasks.append(d)
-                }
-            }
+            tasks = try context.fetch(request)
         } catch {
             print("Error fetching tasks: \(error)")
         }
@@ -98,7 +92,7 @@ extension ViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ArchiveController {
-            destination.data = archivedTasks
+//            destination.data = archivedTasks
         }
     }
 }
@@ -118,11 +112,12 @@ extension ViewController {
             
             self.tasks[indexPath.row].taskArchived = !self.tasks[indexPath.row].taskArchived
             dbArchive = self.tasks[indexPath.row].taskArchived ? 1 : 0
+            print(dbArchive)
+            print(self.tasks[indexPath.row].taskArchived)
             
             self.tasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
             self.saveTasks()
-            tableView.reloadData()
-            print("Saved Successfully")
+            self.loadTasks()
         }
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { action, indexPath in

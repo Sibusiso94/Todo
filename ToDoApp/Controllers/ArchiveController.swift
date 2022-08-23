@@ -18,10 +18,11 @@ class ArchiveController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let safeData = data {
-            archivedTasks = safeData
-            tableView.reloadData()
-        }
+//        if let safeData = data {
+//            archivedTasks = safeData
+//            tableView.reloadData()
+//        }
+        loadArchived()
         
     }
     
@@ -35,24 +36,20 @@ class ArchiveController: UITableViewController {
         return cell
     }
     
-//    func loadArchived() {
-//        let request: NSFetchRequest<Task> = Task.fetchRequest()
-//        var data = [Task]()
-//        do {
-//            data = try context.fetch(request)
-//            for d in data {
-//                if d.taskArchived {
-//                    archivedTasks.append(d)
-//                } else {
-//                    tasks.append(d)
-//                }
-//            }
-//        } catch {
-//            print("Could not fetch Archived data: \(error)")
-//        }
-//
-//        tableView.reloadData()
-//    }
+    func loadArchived() {
+        let request: NSFetchRequest<Task> = Task.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "taskArchived == 1")
+        
+        do {
+            archivedTasks = try context.fetch(request)
+            
+        } catch {
+            print("Could not fetch Archived data: \(error)")
+        }
+
+        tableView.reloadData()
+    }
 
     
 }
