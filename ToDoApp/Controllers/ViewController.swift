@@ -46,9 +46,15 @@ class ViewController: UITableViewController {
         }
         
         alert.addAction(action)
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
+        })
     }
     
+    @objc func dismissOnTapOutside() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - Data Manipulation Methods
@@ -86,27 +92,33 @@ extension ViewController {
         
         
         let archivedAction = UITableViewRowAction(style: .normal, title: "Archive") { action, indexPath in
-            self.tasks[indexPath.row].taskArchived.toggle()
+            var isArchived = self.tasks[indexPath.row].taskArchived.toggle()
+            print(isArchived)
+//            self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskArchived")
+//            self.saveTasks()
         }
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { action, indexPath in
             
             var textField = UITextField()
-            let alert = UIAlertController(title: "Edit Task", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: self.tasks[indexPath.row].taskTitle, message: "", preferredStyle: .alert)
             
-            let action = UIAlertAction(title: "Edit Task", style: .default) { (action) in
+            let action = UIAlertAction(title: "Edit", style: .default) { (action) in
                 self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskTitle")
                 
                 self.saveTasks()
             }
             
             alert.addTextField { (alertTextField) in
-                alertTextField.placeholder = "Edit Text"
+                alertTextField.placeholder = "Edit Task"
                 textField = alertTextField
             }
             
             alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: {
+                alert.view.superview?.isUserInteractionEnabled = true
+                alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
+            })
         }
         
         archivedAction.backgroundColor = .systemPink
