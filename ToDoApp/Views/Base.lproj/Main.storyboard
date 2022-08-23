@@ -30,17 +30,56 @@
                             <outlet property="delegate" destination="72E-Cg-vPe" id="wQ7-ZY-5NZ"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="3dY-zN-EQz">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="fl5-jd-eGP">
+                        <barButtonItem key="leftBarButtonItem" title="Archive" image="bin.xmark" catalog="system" id="t7m-Xn-ZS1">
+                            <connections>
+                                <action selector="archivePressed:" destination="72E-Cg-vPe" id="7zc-GP-bte"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.circle" catalog="system" id="fl5-jd-eGP">
                             <connections>
                                 <action selector="addTaskPressed:" destination="72E-Cg-vPe" id="j0d-5x-FyY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="2vi-AT-Nha" kind="show" identifier="goToArchive" id="m9s-xl-E1G"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7n-fB-oyb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1973.913043478261" y="79.6875"/>
+        </scene>
+        <!--Archive Controller-->
+        <scene sceneID="hDU-19-yQb">
+            <objects>
+                <tableViewController storyboardIdentifier="archive" id="2vi-AT-Nha" customClass="ArchiveController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gTA-Qd-fYm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="archivedTask" id="mqQ-XB-W4E">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mqQ-XB-W4E" id="I1K-oo-4r4">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2vi-AT-Nha" id="gXJ-z8-NUz"/>
+                            <outlet property="delegate" destination="2vi-AT-Nha" id="RdR-Lh-qM4"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="bX3-lv-86i"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nVj-zN-9hi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2987" y="82"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3N2-HR-VpF">
@@ -62,7 +101,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="bin.xmark" catalog="system" width="128" height="93"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -11,6 +11,7 @@ import CoreData
 class ViewController: UITableViewController {
     
     var tasks = [Task]()
+    var archivedTasks = [Task]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let nav = NavAppearance()
 
@@ -55,6 +56,11 @@ class ViewController: UITableViewController {
     @objc func dismissOnTapOutside() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func archivePressed(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "goToArchive", sender: self)
+    }
 }
 
 // MARK: - Data Manipulation Methods
@@ -72,11 +78,27 @@ extension ViewController {
     
     func loadTasks() {
         let request: NSFetchRequest<Task> = Task.fetchRequest()
+        var data = [Task]()
         
         do {
-            tasks = try context.fetch(request)
+            data = try context.fetch(request)
+            for d in data {
+                if d.taskArchived {
+                    archivedTasks.append(d)
+                } else {
+                    tasks.append(d)
+                }
+            }
         } catch {
             print("Error fetching tasks: \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ArchiveController {
+            destination.data = archivedTasks
         }
     }
 }
@@ -92,10 +114,15 @@ extension ViewController {
         
         
         let archivedAction = UITableViewRowAction(style: .normal, title: "Archive") { action, indexPath in
-            var isArchived = self.tasks[indexPath.row].taskArchived.toggle()
-            print(isArchived)
-//            self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskArchived")
-//            self.saveTasks()
+            var dbArchive: Int
+            
+            self.tasks[indexPath.row].taskArchived = !self.tasks[indexPath.row].taskArchived
+            dbArchive = self.tasks[indexPath.row].taskArchived ? 1 : 0
+            
+            self.tasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
+            self.saveTasks()
+            tableView.reloadData()
+            print("Saved Successfully")
         }
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { action, indexPath in
