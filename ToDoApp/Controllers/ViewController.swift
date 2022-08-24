@@ -168,6 +168,7 @@ extension ViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         cell.taskLabel.text = tasks[indexPath.row].taskTitle
+        cell.dateTaskLabel.text = tasks[indexPath.row].taskIsDone ? "Complete" : tasks[indexPath.row].taskDate
         
         // value = condition ? valueIfTrue : valuIfFalse
         cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none

@@ -10,6 +10,7 @@ import UIKit
 class TaskCell: UITableViewCell {
     
     @IBOutlet var taskLabel: UILabel!
+    @IBOutlet var dateTaskLabel: UILabel!
     @IBOutlet var taskImage: UIImageView!
     @IBOutlet var taskView: UIView!
 
