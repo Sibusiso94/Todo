@@ -91,6 +91,7 @@
                                     <outlet property="dateTaskLabel" destination="MeN-Sl-8SY" id="nto-Oj-NkD"/>
                                     <outlet property="taskImage" destination="qZl-C6-kDx" id="EyY-oC-lkO"/>
                                     <outlet property="taskLabel" destination="QEO-4h-R1M" id="P17-2w-voZ"/>
+                                    <outlet property="taskTextView" destination="Z4H-rE-hdG" id="smd-q0-ZbV"/>
                                     <outlet property="taskView" destination="yiv-EU-jyz" id="pLd-bS-wYt"/>
                                 </connections>
                             </tableViewCell>
@@ -192,6 +193,7 @@
                                 <connections>
                                     <outlet property="taskImage" destination="pmU-Zt-LX7" id="hkV-05-HpJ"/>
                                     <outlet property="taskLabel" destination="zmO-aa-hPc" id="5vT-LZ-7cF"/>
+                                    <outlet property="taskTextView" destination="nys-5h-c5j" id="mzm-fc-1xp"/>
                                     <outlet property="taskView" destination="01v-F9-x1c" id="k5X-dB-d8K"/>
                                 </connections>
                             </tableViewCell>
