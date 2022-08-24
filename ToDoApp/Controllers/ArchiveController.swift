@@ -91,8 +91,8 @@ extension ArchiveController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "archivedTask", for: indexPath)
-        cell.textLabel?.text = archivedTasks[indexPath.row].taskTitle
+        let cell = tableView.dequeueReusableCell(withIdentifier: "archivedTask", for: indexPath) as! ArchiveCell
+        cell.taskLabel.text = archivedTasks[indexPath.row].taskTitle
         return cell
     }
 }

@@ -161,8 +161,8 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
-        cell.textLabel?.text = tasks[indexPath.row].taskTitle
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+        cell.taskLabel.text = tasks[indexPath.row].taskTitle
         
         // value = condition ? valueIfTrue : valuIfFalse
         cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none
