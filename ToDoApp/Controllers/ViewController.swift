@@ -23,6 +23,12 @@ class ViewController: UITableViewController {
         
         loadTasks()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTasks()
+        tableView.reloadData()
+    }
 
     // MARK: - Add A New Task
     @IBAction func addTaskPressed(_ sender: UIBarButtonItem) {

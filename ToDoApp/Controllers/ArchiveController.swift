@@ -13,7 +13,7 @@ class ArchiveController: UITableViewController {
     var data: [Task]?
     var archivedTasks = [Task]()
     let nav = NavAppearance()
-    let vc = ViewController
+    let vc = ViewController()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -71,13 +71,14 @@ extension ArchiveController {
             self.archivedTasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
             self.saveTasks()
             self.loadArchived()
+            self.vc.loadTasks()
         }
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
             
-            //delete
+            self.context.delete(self.archivedTasks[indexPath.row])
+            self.archivedTasks.remove(at: indexPath.row)
             
-//            self.archivedTasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
             self.saveTasks()
             self.loadArchived()
         }
