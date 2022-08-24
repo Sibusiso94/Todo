@@ -90,11 +90,11 @@ extension ViewController {
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? ArchiveController {
-//            destination.data = archivedTasks
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? ArchiveController {
+//           destination.data = archivedTasks
+//        }
+//    }
 }
 
 // MARK: - Table view data source
@@ -107,7 +107,7 @@ extension ViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         
-        let archivedAction = UITableViewRowAction(style: .normal, title: "Archive") { action, indexPath in
+        let archivedAction = UITableViewRowAction(style: .normal, title: "Remove") { action, indexPath in
             var dbArchive: Int
             
             self.tasks[indexPath.row].taskArchived = !self.tasks[indexPath.row].taskArchived

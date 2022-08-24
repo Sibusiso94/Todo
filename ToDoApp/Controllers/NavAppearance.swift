@@ -18,4 +18,13 @@ struct NavAppearance {
         navItem.standardAppearance = navAppear
         navItem.scrollEdgeAppearance = navAppear
     }
+    
+    func archiveNavAppearance(_ navItem: UINavigationItem) {
+        let navAppear = UINavigationBarAppearance()
+        navAppear.configureWithTransparentBackground()
+        navAppear.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
+        navAppear.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navItem.standardAppearance = navAppear
+        navItem.scrollEdgeAppearance = navAppear
+    }
 }
