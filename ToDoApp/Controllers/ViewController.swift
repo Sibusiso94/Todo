@@ -38,8 +38,11 @@ class ViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Task", style: .default) { (action) in
             
+            let date = self.getDate()
+            
             let newTask = Task(context: self.context)
             newTask.taskTitle = textField.text
+            newTask.taskDate = date
             newTask.taskIsDone = false
             newTask.taskArchived = false
             
@@ -96,11 +99,13 @@ extension ViewController {
         tableView.reloadData()
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? ArchiveController {
-//           destination.data = archivedTasks
-//        }
-//    }
+    func getDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let currentDate = dateFormatter.string(from: date)
+        return currentDate
+    }
 }
 
 // MARK: - Table view data source
