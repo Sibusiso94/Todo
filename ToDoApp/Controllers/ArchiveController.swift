@@ -83,6 +83,9 @@ extension ArchiveController {
             self.loadArchived()
         }
         
+        deleteAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
+        returnAction.backgroundColor = UIColor(red: 0.88, green: 0.94, blue: 0.92, alpha: 1.0)
+        
         return [returnAction, deleteAction]
     }
     

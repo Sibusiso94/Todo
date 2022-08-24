@@ -154,8 +154,8 @@ extension ViewController {
             })
         }
         
-        archivedAction.backgroundColor = .systemPink
-        editAction.backgroundColor = .systemMint
+        archivedAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
+        editAction.backgroundColor = UIColor(red: 0.88, green: 0.94, blue: 0.92, alpha: 1.0)
         
         return [archivedAction, editAction]
     }
