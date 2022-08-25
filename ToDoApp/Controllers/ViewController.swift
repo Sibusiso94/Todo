@@ -108,6 +108,37 @@ extension ViewController {
     }
 }
 
+// MARK: - Search Bar Methods
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Task> = Task.fetchRequest()
+        
+        if let searchText = searchBar.text {
+            request.predicate = NSPredicate(format: "taskTitle CONTAINS[cd] %@", searchText)
+            request.sortDescriptors = [NSSortDescriptor(key: "taskTitle", ascending: true)]
+            
+            do {
+                tasks = try context.fetch(request)
+            } catch {
+                print("Error fetching tasks: \(error)")
+            }
+            
+            tableView.reloadData()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadTasks()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+}
+
 // MARK: - Table view data source
 extension ViewController {
     
