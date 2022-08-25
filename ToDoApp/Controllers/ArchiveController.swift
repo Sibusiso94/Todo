@@ -76,11 +76,25 @@ extension ArchiveController {
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
             
-            self.context.delete(self.archivedTasks[indexPath.row])
-            self.archivedTasks.remove(at: indexPath.row)
+            let deleteMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this Task?", preferredStyle: .alert)
             
-            self.saveTasks()
-            self.loadArchived()
+            let yes = UIAlertAction(title: "Yes", style: .default) { (action) in
+                self.context.delete(self.archivedTasks[indexPath.row])
+                self.archivedTasks.remove(at: indexPath.row)
+                
+                self.saveTasks()
+                self.loadArchived()
+            }
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                print("Cancelled")
+            }
+            
+            deleteMessage.addAction(yes)
+            deleteMessage.addAction(cancel)
+            
+            self.present(deleteMessage, animated: true, completion: nil)
+            
         }
         
         deleteAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
