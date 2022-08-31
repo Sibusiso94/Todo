@@ -54,6 +54,9 @@ class TaskCell: UITableViewCell {
         } else {
             checkButton.setImage((UIImage(systemName: "square")), for: .normal)
         }
+        
+        //         value = condition ? valueIfTrue : valuIfFalse
+        //        cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none
     }
     
     @IBAction func doneButtonClicked(_ sender: UIButton) {

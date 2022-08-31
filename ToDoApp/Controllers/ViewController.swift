@@ -31,43 +31,6 @@ class ViewController: UITableViewController {
     }
 
     // MARK: - Add A New Task
-    @IBAction func addTaskPressed(_ sender: UIBarButtonItem) {
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Add a Task", message: "", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Add Task", style: .default) { (action) in
-            
-            let date = self.getDate()
-            
-            let newTask = Task(context: self.context)
-            newTask.taskTitle = textField.text
-            newTask.taskDate = date
-            newTask.taskIsDone = false
-            newTask.taskArchived = false
-            newTask.taskDescription = "Description"
-            newTask.taskTime = "09:00"
-            
-            self.tasks.append(newTask)
-            self.saveTasks()
-        }
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create New Task"
-            textField = alertTextField
-        }
-        
-        alert.addAction(action)
-        present(alert, animated: true, completion: {
-            alert.view.superview?.isUserInteractionEnabled = true
-            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
-        })
-    }
-    
-    @objc func dismissOnTapOutside() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     
     @IBAction func archivePressed(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "goToArchive", sender: self)
@@ -181,10 +144,7 @@ extension ViewController {
             }
             
             alert.addAction(action)
-            self.present(alert, animated: true, completion: {
-                alert.view.superview?.isUserInteractionEnabled = true
-                alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
-            })
+            self.present(alert, animated: true, completion: nil)
         }
         
         archivedAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
@@ -208,26 +168,19 @@ extension ViewController {
 //        cell.dateTaskLabel.text = tasks[indexPath.row].taskIsDone ? "Complete" : tasks[indexPath.row].taskDate
         cell.completeDelegate = self
         
-//         value = condition ? valueIfTrue : valuIfFalse
-//        cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none
-        
         return cell
     }
     
     func isDone(for index: Int) {
         tasks[index].taskIsDone.toggle()
-        do {
-            try saveTasks()
-        } catch {
-            print("Could not Toggle")
-        }
+        saveTasks()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         // equals the opposite, reverses what it used to be. Instead of if else
-        tasks[indexPath.row].taskIsDone = !tasks[indexPath.row].taskIsDone
-        self.saveTasks()
+//        tasks[indexPath.row].taskIsDone = !tasks[indexPath.row].taskIsDone
+//        self.saveTasks()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
