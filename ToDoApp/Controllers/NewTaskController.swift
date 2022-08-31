@@ -57,7 +57,15 @@ class NewTaskController: UIViewController {
             
             self.tasks.append(task)
             self.saveTasks()
-            print("Saved Successfully")
+            
+            let completeMessage = UIAlertController(title: "Successful", message: "Your task has been successfully addded", preferredStyle: .alert)
+            let okay = UIAlertAction(title: "Okay", style: .cancel) { (action) in
+                print("Successful")
+            }
+            
+            completeMessage.addAction(okay)
+            self.present(completeMessage, animated: true, completion: nil)
+            
         }
     }
 }
