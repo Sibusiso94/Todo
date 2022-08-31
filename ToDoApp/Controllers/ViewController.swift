@@ -45,6 +45,8 @@ class ViewController: UITableViewController {
             newTask.taskDate = date
             newTask.taskIsDone = false
             newTask.taskArchived = false
+            newTask.taskDescription = "Description"
+            newTask.taskTime = "09:00"
             
             self.tasks.append(newTask)
             self.saveTasks()
@@ -197,14 +199,28 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
-        cell.taskLabel.text = tasks[indexPath.row].taskTitle
-        cell.dateTaskLabel.text = tasks[indexPath.row].taskIsDone ? "Complete" : tasks[indexPath.row].taskDate
+        let taskModel = tasks[indexPath.row]
         
-        // value = condition ? valueIfTrue : valuIfFalse
-        cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+        
+         cell.setUp(title: taskModel.taskTitle!, description: taskModel.taskDescription!, date: taskModel.taskDate!, time: taskModel.taskTime!, isDone: taskModel.taskIsDone)
+//        cell.taskLabel.text = tasks[indexPath.row].taskTitle
+//        cell.dateTaskLabel.text = tasks[indexPath.row].taskIsDone ? "Complete" : tasks[indexPath.row].taskDate
+        cell.completeDelegate = self
+        
+//         value = condition ? valueIfTrue : valuIfFalse
+//        cell.accessoryType = tasks[indexPath.row].taskIsDone ? .checkmark : .none
         
         return cell
+    }
+    
+    func isDone(for index: Int) {
+        tasks[index].taskIsDone.toggle()
+        do {
+            try saveTasks()
+        } catch {
+            print("Could not Toggle")
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -214,6 +230,16 @@ extension ViewController {
         self.saveTasks()
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
 }
+
+extension ViewController: Completable {
+
+    func toggleComplete(for cell: UITableViewCell) {
+
+        if let indexPath = tableView.indexPath(for: cell) {
+            isDone(for: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+}
+

@@ -7,13 +7,22 @@
 
 import UIKit
 
+protocol Completable {
+    func toggleComplete(for cell: UITableViewCell)
+}
+
 class TaskCell: UITableViewCell {
     
+    var completeDelegate: Completable?
+    
     @IBOutlet var taskLabel: UILabel!
+    @IBOutlet var descTaskLabel: UILabel!
     @IBOutlet var dateTaskLabel: UILabel!
+    @IBOutlet var timeTaskLabel: UILabel!
     @IBOutlet var taskImage: UIImageView!
     @IBOutlet var taskView: UIView!
     @IBOutlet var taskTextView: UIView!
+    @IBOutlet weak var checkButton: UIButton!
 
     
     override func awakeFromNib() {
@@ -31,6 +40,25 @@ class TaskCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    func setUp(title: String, description: String, date: String, time: String, isDone: Bool) {
+        
+        taskLabel.text = title
+        descTaskLabel.text = description
+        dateTaskLabel.text = date
+        timeTaskLabel.text = time
+        
+        if isDone {
+            checkButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        } else {
+            checkButton.setImage((UIImage(systemName: "square")), for: .normal)
+        }
+    }
+    
+    @IBAction func doneButtonClicked(_ sender: UIButton) {
+        
+        completeDelegate?.toggleComplete(for: self)
     }
 
 }
