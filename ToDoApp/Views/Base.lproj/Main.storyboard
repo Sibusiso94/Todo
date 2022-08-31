@@ -156,18 +156,76 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.square.dashed" catalog="system" id="47s-7z-h7S">
                             <connections>
-                                <segue destination="ohP-Xr-VxE" kind="show" id="ggR-up-eS1"/>
+                                <segue destination="ohP-Xr-VxE" kind="show" identifier="goToAdd" id="ggR-up-eS1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="2vi-AT-Nha" kind="show" identifier="goToArchive" id="m9s-xl-E1G"/>
+                        <segue destination="HSn-nV-etN" kind="show" identifier="gotToEdit" id="BhP-Xp-7zN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7n-fB-oyb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1973.913043478261" y="79.6875"/>
+        </scene>
+        <!--Edit Task-->
+        <scene sceneID="a9J-OH-bla">
+            <objects>
+                <viewController id="HSn-nV-etN" customClass="EditTasController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="awD-xc-pCv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="83" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-TF-Gde">
+                                <rect key="frame" x="10" y="138" width="394" height="625"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRM-jk-5O0">
+                                        <rect key="frame" x="50" y="0.0" width="294" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="IR3-75-efE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lo6-GQ-UMz">
+                                        <rect key="frame" x="50" y="143" width="294" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="7gm-hZ-H4F"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="p1C-4D-u4d">
+                                        <rect key="frame" x="37" y="376" width="320" height="249"/>
+                                    </datePicker>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="p1C-4D-u4d" firstAttribute="leading" secondItem="XJU-TF-Gde" secondAttribute="leading" constant="37" id="T3u-LI-UHT"/>
+                                    <constraint firstItem="HRM-jk-5O0" firstAttribute="leading" secondItem="XJU-TF-Gde" secondAttribute="leading" constant="50" id="VN3-sQ-Mb7"/>
+                                    <constraint firstItem="Lo6-GQ-UMz" firstAttribute="leading" secondItem="XJU-TF-Gde" secondAttribute="leading" constant="50" id="eAT-hh-s2a"/>
+                                    <constraint firstAttribute="trailing" secondItem="HRM-jk-5O0" secondAttribute="trailing" constant="50" id="hDU-Fj-gyC"/>
+                                    <constraint firstAttribute="trailing" secondItem="p1C-4D-u4d" secondAttribute="trailing" constant="37" id="nDp-c9-jex"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5Yp-5K-ZbF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XJU-TF-Gde" firstAttribute="leading" secondItem="5Yp-5K-ZbF" secondAttribute="leading" constant="10" id="WJB-b1-9Vp"/>
+                            <constraint firstItem="XJU-TF-Gde" firstAttribute="top" secondItem="5Yp-5K-ZbF" secondAttribute="top" constant="50" id="cez-MX-Azt"/>
+                            <constraint firstItem="5Yp-5K-ZbF" firstAttribute="trailing" secondItem="XJU-TF-Gde" secondAttribute="trailing" constant="10" id="l9r-Hx-JZ7"/>
+                            <constraint firstItem="5Yp-5K-ZbF" firstAttribute="bottom" secondItem="XJU-TF-Gde" secondAttribute="bottom" constant="50" id="vjs-aI-wCl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Task" id="NUV-Pz-lms">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="UFD-9V-ar7"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L5g-71-w7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1974" y="944"/>
         </scene>
         <!--Archive-->
         <scene sceneID="hDU-19-yQb">
@@ -262,19 +320,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="1pj-2b-6Ve">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="83" translatesAutoresizingMaskIntoConstraints="NO" id="1pj-2b-6Ve">
                                 <rect key="frame" x="10" y="138" width="394" height="625"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lR2-fs-OhX">
                                         <rect key="frame" x="50" y="0.0" width="294" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="vge-zz-FMF"/>
+                                            <constraint firstAttribute="height" constant="60" id="G9z-7u-xMZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7xj-JS-q0r">
-                                        <rect key="frame" x="50" y="90" width="294" height="150"/>
+                                        <rect key="frame" x="50" y="143" width="294" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="YGH-X3-Aed"/>
                                         </constraints>
@@ -282,7 +340,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <datePicker contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="wuQ-zh-0RS">
-                                        <rect key="frame" x="37" y="270" width="320" height="355"/>
+                                        <rect key="frame" x="37" y="376" width="320" height="249"/>
                                         <connections>
                                             <action selector="dateTimeChosen:" destination="ohP-Xr-VxE" eventType="valueChanged" id="b5I-Az-2CN"/>
                                         </connections>
@@ -306,7 +364,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="v3h-pQ-zMh">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.square.dashed" catalog="system" id="geQ-Tj-cz6">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="geQ-Tj-cz6">
                             <connections>
                                 <action selector="addTaskCliced:" destination="ohP-Xr-VxE" id="6at-kK-eNM"/>
                             </connections>

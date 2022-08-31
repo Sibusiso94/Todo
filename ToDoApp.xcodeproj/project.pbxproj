@@ -20,6 +20,7 @@
 		5C1E99B528B3D3CA00FD7761 /* NavAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1E99B428B3D3CA00FD7761 /* NavAppearance.swift */; };
 		5C76BDA528B4DBED00CEFBA2 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76BDA428B4DBED00CEFBA2 /* ArchiveController.swift */; };
 		5C7D5C7E28B78DA700F02846 /* DatabaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D5C7D28B78DA700F02846 /* DatabaseHandler.swift */; };
+		5C9C6C7F28BFA01200A9D6A0 /* EditTasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C6C7E28BFA01200A9D6A0 /* EditTasController.swift */; };
 		5CA735CD28B6199200208297 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA735CC28B6199200208297 /* TaskCell.swift */; };
 		5CA735CF28B61DDC00208297 /* ArchiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA735CE28B61DDC00208297 /* ArchiveCell.swift */; };
 		5CF78E3E28BF6FFB009943FB /* NewTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF78E3D28BF6FFB009943FB /* NewTaskController.swift */; };
@@ -60,6 +61,7 @@
 		5C1E99B428B3D3CA00FD7761 /* NavAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavAppearance.swift; sourceTree = "<group>"; };
 		5C76BDA428B4DBED00CEFBA2 /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
 		5C7D5C7D28B78DA700F02846 /* DatabaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHandler.swift; sourceTree = "<group>"; };
+		5C9C6C7E28BFA01200A9D6A0 /* EditTasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTasController.swift; sourceTree = "<group>"; };
 		5CA735CC28B6199200208297 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		5CA735CE28B61DDC00208297 /* ArchiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveCell.swift; sourceTree = "<group>"; };
 		5CF78E3D28BF6FFB009943FB /* NewTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				5CA735CC28B6199200208297 /* TaskCell.swift */,
 				5CA735CE28B61DDC00208297 /* ArchiveCell.swift */,
 				5CF78E3D28BF6FFB009943FB /* NewTaskController.swift */,
+				5C9C6C7E28BFA01200A9D6A0 /* EditTasController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				5C1E99B528B3D3CA00FD7761 /* NavAppearance.swift in Sources */,
 				5CA735CF28B61DDC00208297 /* ArchiveCell.swift in Sources */,
 				5C0C2DC028B37A4700C29AF9 /* ToDoApp.xcdatamodeld in Sources */,
+				5C9C6C7F28BFA01200A9D6A0 /* EditTasController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
