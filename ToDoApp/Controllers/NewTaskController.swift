@@ -66,6 +66,9 @@ class NewTaskController: UIViewController {
             self.present(completeMessage, animated: true, completion: nil)
             
         }
+        
+        newTask.text = ""
+        taskDesc.text = ""
     }
 }
 

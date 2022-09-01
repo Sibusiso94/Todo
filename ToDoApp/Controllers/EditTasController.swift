@@ -24,6 +24,9 @@ class EditTasController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        task.text = tasks[indexPath!].taskTitle
+//        taskDesc.text = tasks[indexPath!].taskDescription
+        
         loadTasks()
         
     }
@@ -45,6 +48,7 @@ class EditTasController: UIViewController {
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
         
         let item = tasks[indexPath!]
+        
         if let title = task.text, let descr = taskDesc.text {
             
             item.setValue(title, forKey: "taskTitle")
@@ -53,11 +57,21 @@ class EditTasController: UIViewController {
             item.setValue(time, forKey: "taskTime")
             print(title)
             print(descr)
-    //        self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskTitle")
             saveTasks()
         } else {
             print("Not all entered")
         }
+        
+        let completeMessage = UIAlertController(title: "Successful", message: "Your task has been edited", preferredStyle: .alert)
+        let okay = UIAlertAction(title: "Okay", style: .cancel) { (action) in
+            print("Successful")
+        }
+        
+        completeMessage.addAction(okay)
+        self.present(completeMessage, animated: true, completion: nil)
+        
+        task.text = ""
+        taskDesc.text = ""
     }
     
 }
