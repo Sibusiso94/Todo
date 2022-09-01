@@ -10,7 +10,7 @@ import CoreData
 
 class ViewController: UITableViewController {
     
-    var tasks = [Task]()
+    //var tasks = [Task]()
     var archivedTasks = [Task]()
     var editIndexPath: Int?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -23,12 +23,12 @@ class ViewController: UITableViewController {
         nav.homeNavAppearance(navigationItem)
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        loadTasks()
+        dbh.loadTasks(to: tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadTasks()
+        dbh.loadTasks(to: tableView)
         tableView.reloadData()
     }
 
@@ -36,24 +36,6 @@ class ViewController: UITableViewController {
     
     @IBAction func archivePressed(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "goToArchive", sender: self)
-    }
-}
-
-// MARK: - Data Manipulation Methods
-extension ViewController {
-    
-    func loadTasks() {
-        let request: NSFetchRequest<Task> = Task.fetchRequest()
-        
-        request.predicate = NSPredicate(format: "taskArchived == 0")
-        
-        do {
-            tasks = try context.fetch(request)
-        } catch {
-            print("Error fetching tasks: \(error)")
-        }
-        
-        tableView.reloadData()
     }
 }
 
@@ -68,7 +50,7 @@ extension ViewController: UISearchBarDelegate {
             request.sortDescriptors = [NSSortDescriptor(key: "taskTitle", ascending: true)]
             
             do {
-                tasks = try context.fetch(request)
+                dbh.tasks = try context.fetch(request)
             } catch {
                 print("Error fetching tasks: \(error)")
             }
@@ -79,7 +61,7 @@ extension ViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadTasks()
+            dbh.loadTasks(to: tableView)
             
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
@@ -106,15 +88,15 @@ extension ViewController {
         let archiveAction = UIContextualAction(style: .normal, title: "Archive", handler: { (action, view, completion) in
             var dbArchive: Int
             
-            self.tasks[indexPath.row].taskArchived = !self.tasks[indexPath.row].taskArchived
-            dbArchive = self.tasks[indexPath.row].taskArchived ? 1 : 0
+            self.dbh.tasks[indexPath.row].taskArchived = !self.dbh.tasks[indexPath.row].taskArchived
+            dbArchive = self.dbh.tasks[indexPath.row].taskArchived ? 1 : 0
             print(dbArchive)
-            print(self.tasks[indexPath.row].taskArchived)
+            print(self.dbh.tasks[indexPath.row].taskArchived)
             
-            self.tasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
+            self.dbh.tasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
             self.dbh.saveTasks()
             self.tableView.reloadData()
-            self.loadTasks()
+            self.dbh.loadTasks(to: tableView)
         })
         
         archiveAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
@@ -131,14 +113,14 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return dbh.tasks.count
     }
     
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let taskModel = tasks[indexPath.row]
+        let taskModel = dbh.tasks[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         
@@ -151,7 +133,7 @@ extension ViewController {
     }
     
     func isDone(for index: Int) {
-        tasks[index].taskIsDone.toggle()
+        dbh.tasks[index].taskIsDone.toggle()
         dbh.saveTasks()
         tableView.reloadData()
     }

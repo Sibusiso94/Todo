@@ -149,7 +149,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="My Tasks" id="3dY-zN-EQz">
                         <barButtonItem key="backBarButtonItem" title="Tasks" id="UBH-Or-IBh"/>
-                        <barButtonItem key="leftBarButtonItem" title="Archive" image="bin.xmark" catalog="system" id="t7m-Xn-ZS1">
+                        <barButtonItem key="leftBarButtonItem" title="Archive" image="archivebox" catalog="system" id="t7m-Xn-ZS1">
                             <connections>
                                 <action selector="archivePressed:" destination="72E-Cg-vPe" id="7zc-GP-bte"/>
                             </connections>
@@ -223,7 +223,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Task" id="NUV-Pz-lms">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="UFD-9V-ar7">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="UFD-9V-ar7">
                             <connections>
                                 <action selector="editButtonPressed:" destination="HSn-nV-etN" id="bBJ-EG-QTI"/>
                             </connections>
@@ -375,7 +375,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="v3h-pQ-zMh">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="geQ-Tj-cz6">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="geQ-Tj-cz6">
                             <connections>
                                 <action selector="addTaskCliced:" destination="ohP-Xr-VxE" id="6at-kK-eNM"/>
                             </connections>
@@ -411,7 +411,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bin.xmark" catalog="system" width="128" height="93"/>
+        <image name="archivebox" catalog="system" width="128" height="106"/>
         <image name="list.bullet.circle" catalog="system" width="128" height="121"/>
         <image name="plus.square.dashed" catalog="system" width="128" height="114"/>
         <image name="square" catalog="system" width="128" height="114"/>

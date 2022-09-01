@@ -10,13 +10,14 @@ import CoreData
 
 class EditTasController: UIViewController {
     
-    var tasks = [Task]()
+//    var tasks = [Task]()
     var date: String = ""
     var time: String = ""
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var indexPath: Int?
     let nav = NavAppearance()
     let dbh = DatabaseHandler()
+    let vc = ViewController()
     
     @IBOutlet weak var task: UITextField!
     @IBOutlet weak var taskDesc: UITextField!
@@ -30,9 +31,7 @@ class EditTasController: UIViewController {
 //        task.text = tasks[indexPath!].taskTitle
 //        taskDesc.text = tasks[indexPath!].taskDescription
         
-        task.layer.cornerRadius = task.frame.size.height / 10
-        
-        loadTasks()
+        dbh.loadTasks(to: vc.tableView)
         
     }
     
@@ -52,7 +51,7 @@ class EditTasController: UIViewController {
     
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
         
-        let item = tasks[indexPath!]
+        let item = dbh.tasks[indexPath!]
         
         if let title = task.text, let descr = taskDesc.text {
             
@@ -84,18 +83,16 @@ class EditTasController: UIViewController {
 // MARK: - Data Manipulation
 extension EditTasController {
     
-    func loadTasks() {
-        let request: NSFetchRequest<Task> = Task.fetchRequest()
-        
-        request.predicate = NSPredicate(format: "taskArchived == 0")
-        
-        do {
-            tasks = try context.fetch(request)
-        } catch {
-            print("Error fetching tasks: \(error)")
-        }
-        
-//        tableView.reloadData()
-    }
+//    func loadTasks() {
+//        let request: NSFetchRequest<Task> = Task.fetchRequest()
+//
+//        request.predicate = NSPredicate(format: "taskArchived == 0")
+//
+//        do {
+//            tasks = try context.fetch(request)
+//        } catch {
+//            print("Error fetching tasks: \(error)")
+//        }
+//    }
     
 }
