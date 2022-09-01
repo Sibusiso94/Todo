@@ -15,6 +15,8 @@ class EditTasController: UIViewController {
     var time: String = ""
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var indexPath: Int?
+    let nav = NavAppearance()
+    let dbh = DatabaseHandler()
     
     @IBOutlet weak var task: UITextField!
     @IBOutlet weak var taskDesc: UITextField!
@@ -24,8 +26,11 @@ class EditTasController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        nav.homeNavAppearance(navigationItem)
 //        task.text = tasks[indexPath!].taskTitle
 //        taskDesc.text = tasks[indexPath!].taskDescription
+        
+        task.layer.cornerRadius = task.frame.size.height / 10
         
         loadTasks()
         
@@ -57,7 +62,7 @@ class EditTasController: UIViewController {
             item.setValue(time, forKey: "taskTime")
             print(title)
             print(descr)
-            saveTasks()
+            dbh.saveTasks()
         } else {
             print("Not all entered")
         }
@@ -78,16 +83,6 @@ class EditTasController: UIViewController {
 
 // MARK: - Data Manipulation
 extension EditTasController {
-    
-    func saveTasks() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving task: \(error)")
-        }
-        
-//        tableView.reloadData()
-    }
     
     func loadTasks() {
         let request: NSFetchRequest<Task> = Task.fetchRequest()

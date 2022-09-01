@@ -19,6 +19,7 @@ class NewTaskController: UIViewController {
     var date: String = ""
     var time: String = ""
     let nav = NavAppearance()
+    let dbh = DatabaseHandler()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,7 @@ class NewTaskController: UIViewController {
             task.taskArchived = false
             
             self.tasks.append(task)
-            self.saveTasks()
+            self.dbh.saveTasks()
             
             let completeMessage = UIAlertController(title: "Successful", message: "Your task has been successfully addded", preferredStyle: .alert)
             let okay = UIAlertAction(title: "Okay", style: .cancel) { (action) in
@@ -70,19 +71,4 @@ class NewTaskController: UIViewController {
         newTask.text = ""
         taskDesc.text = ""
     }
-}
-
-// MARK: - Data Manipulation
-extension NewTaskController {
-    
-    func saveTasks() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving task: \(error)")
-        }
-        
-//        tableView.reloadData()
-    }
-    
 }

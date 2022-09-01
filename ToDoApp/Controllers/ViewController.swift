@@ -15,6 +15,7 @@ class ViewController: UITableViewController {
     var editIndexPath: Int?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let nav = NavAppearance()
+    let dbh = DatabaseHandler()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +42,6 @@ class ViewController: UITableViewController {
 // MARK: - Data Manipulation Methods
 extension ViewController {
     
-    func saveTasks() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving task: \(error)")
-        }
-        
-        tableView.reloadData()
-    }
-    
     func loadTasks() {
         let request: NSFetchRequest<Task> = Task.fetchRequest()
         
@@ -63,14 +54,6 @@ extension ViewController {
         }
         
         tableView.reloadData()
-    }
-    
-    func getDate() -> String {
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let currentDate = dateFormatter.string(from: date)
-        return currentDate
     }
 }
 
@@ -129,7 +112,8 @@ extension ViewController {
             print(self.tasks[indexPath.row].taskArchived)
             
             self.tasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
-            self.saveTasks()
+            self.dbh.saveTasks()
+            self.tableView.reloadData()
             self.loadTasks()
         })
         
@@ -168,7 +152,8 @@ extension ViewController {
     
     func isDone(for index: Int) {
         tasks[index].taskIsDone.toggle()
-        saveTasks()
+        dbh.saveTasks()
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

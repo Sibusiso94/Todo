@@ -5,8 +5,21 @@
 //  Created by Sibusiso Mbonani on 2022/08/25.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
-struct DatabaseHandler {
+class DatabaseHandler {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    func saveTasks() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving task: \(error)")
+        }
+        
+//        tableView.reloadData()
+    }
     
 }

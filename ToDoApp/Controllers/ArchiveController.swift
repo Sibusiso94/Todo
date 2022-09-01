@@ -14,6 +14,7 @@ class ArchiveController: UITableViewController {
     var archivedTasks = [Task]()
     let nav = NavAppearance()
     let vc = ViewController()
+    let dbh = DatabaseHandler()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -39,16 +40,6 @@ class ArchiveController: UITableViewController {
 
         tableView.reloadData()
     }
-    
-    func saveTasks() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving task: \(error)")
-        }
-        
-        tableView.reloadData()
-    }
 }
 
 extension ArchiveController {
@@ -69,7 +60,8 @@ extension ArchiveController {
             print(self.archivedTasks[indexPath.row].taskArchived)
             
             self.archivedTasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
-            self.saveTasks()
+            self.dbh.saveTasks()
+            self.tableView.reloadData()
             self.loadArchived()
             self.vc.loadTasks()
         }
@@ -82,7 +74,8 @@ extension ArchiveController {
                 self.context.delete(self.archivedTasks[indexPath.row])
                 self.archivedTasks.remove(at: indexPath.row)
                 
-                self.saveTasks()
+                self.dbh.saveTasks()
+                self.tableView.reloadData()
                 self.loadArchived()
             }
             
