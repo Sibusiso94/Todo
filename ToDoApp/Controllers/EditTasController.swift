@@ -11,9 +11,15 @@ import CoreData
 class EditTasController: UIViewController {
     
     var tasks = [Task]()
-    var text: String?
+    var date: String = ""
+    var time: String = ""
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var indexPath: Int?
+    
+    @IBOutlet weak var task: UITextField!
+    @IBOutlet weak var taskDesc: UITextField!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +28,36 @@ class EditTasController: UIViewController {
         
     }
     
+    @IBAction func dateTimeSelected(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.dateFormat = "HH:mm"
+//        formatter.dateStyle = .long
+//        formatter.timeStyle = .short
+        
+        date = dateFormatter.string(from: sender.date)
+        time = timeFormatter.string(from: sender.date)
+    }
+    
     
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
-//        let task = Task(context: self.context)
-        print(tasks[indexPath!].taskTitle)
-//        print(tasks)
         
-//        self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskTitle")
-        
-        saveTasks()
-        
+        let item = tasks[indexPath!]
+        if let title = task.text, let descr = taskDesc.text {
+            
+            item.setValue(title, forKey: "taskTitle")
+            item.setValue(descr, forKey: "taskDescription")
+            item.setValue(date, forKey: "taskDate")
+            item.setValue(time, forKey: "taskTime")
+            print(title)
+            print(descr)
+    //        self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskTitle")
+            saveTasks()
+        } else {
+            print("Not all entered")
+        }
     }
     
 }

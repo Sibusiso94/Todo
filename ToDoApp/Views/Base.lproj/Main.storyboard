@@ -199,6 +199,9 @@
                                     </textField>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="p1C-4D-u4d">
                                         <rect key="frame" x="37" y="376" width="320" height="249"/>
+                                        <connections>
+                                            <action selector="dateTimeSelected:" destination="HSn-nV-etN" eventType="valueChanged" id="c6K-Lt-v08"/>
+                                        </connections>
                                     </datePicker>
                                 </subviews>
                                 <constraints>
@@ -226,6 +229,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="task" destination="HRM-jk-5O0" id="Arv-yB-kh4"/>
+                        <outlet property="taskDesc" destination="Lo6-GQ-UMz" id="bLO-Hc-ve7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5g-71-w7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
