@@ -12,6 +12,7 @@ class ViewController: UITableViewController {
     
     var tasks = [Task]()
     var archivedTasks = [Task]()
+    var editIndexPath: Int?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let nav = NavAppearance()
 
@@ -111,10 +112,15 @@ extension ViewController {
         true
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let item = tasks[indexPath.row]
         
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            self.editIndexPath = indexPath.row
+            self.performSegue(withIdentifier: "goToEdit", sender: indexPath)
+        }
         
-        let archivedAction = UITableViewRowAction(style: .normal, title: "Remove") { action, indexPath in
+        let archiveAction = UIContextualAction(style: .normal, title: "Archive", handler: { (action, view, completion) in
             var dbArchive: Int
             
             self.tasks[indexPath.row].taskArchived = !self.tasks[indexPath.row].taskArchived
@@ -125,37 +131,26 @@ extension ViewController {
             self.tasks[indexPath.row].setValue(dbArchive, forKey: "taskArchived")
             self.saveTasks()
             self.loadTasks()
-        }
+        })
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { action, indexPath in
-            
-            var textField = UITextField()
-            let alert = UIAlertController(title: self.tasks[indexPath.row].taskTitle, message: "", preferredStyle: .alert)
-            
-            let action = UIAlertAction(title: "Edit", style: .default) { (action) in
-                self.tasks[indexPath.row].setValue(textField.text!, forKey: "taskTitle")
-                
-                self.saveTasks()
-            }
-            
-            alert.addTextField { (alertTextField) in
-                alertTextField.placeholder = "Edit Task"
-                textField = alertTextField
-            }
-            
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        archivedAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
+        archiveAction.backgroundColor = UIColor(red: 0.96, green: 0.78, blue: 0.92, alpha: 1.0)
         editAction.backgroundColor = UIColor(red: 0.88, green: 0.94, blue: 0.92, alpha: 1.0)
         
-        return [archivedAction, editAction]
+        return UISwipeActionsConfiguration(actions: [editAction, archiveAction])
+    }
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? EditTasController {
+            destination.indexPath = editIndexPath
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

@@ -163,7 +163,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="2vi-AT-Nha" kind="show" identifier="goToArchive" id="m9s-xl-E1G"/>
-                        <segue destination="HSn-nV-etN" kind="show" identifier="gotToEdit" id="BhP-Xp-7zN"/>
+                        <segue destination="HSn-nV-etN" kind="show" identifier="goToEdit" id="BhP-Xp-7zN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7n-fB-oyb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -197,7 +197,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="p1C-4D-u4d">
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="p1C-4D-u4d">
                                         <rect key="frame" x="37" y="376" width="320" height="249"/>
                                     </datePicker>
                                 </subviews>
@@ -220,7 +220,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Task" id="NUV-Pz-lms">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="UFD-9V-ar7"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="UFD-9V-ar7">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="HSn-nV-etN" id="bBJ-EG-QTI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5g-71-w7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

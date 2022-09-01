@@ -44,7 +44,6 @@ class NewTaskController: UIViewController {
     }
     
     @IBAction func addTaskCliced(_ sender: UIBarButtonItem) {
-        print(newTask.text!)
         
         let task = Task(context: self.context)
         if let newTask = newTask.text, let newDesc = taskDesc.text {
